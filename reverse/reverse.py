@@ -44,17 +44,29 @@ class LinkedList:
 
   def reverse_list(self):
     # TO BE COMPLETED
-    #didnt we do this exact thing in class on like wednesday?
-
+    def recursive_helper(currentNode, previousNode):
+      if not currentNode:
+        return previousNode
+      else:
+        nextNode=currentNode.get_next()
+        currentNode.set_next(previousNode)
+        previousNode=currentNode
+        currentNode=nextNode
+        return recursive_helper(currentNode, previousNode)
     if self.head and self.head.get_next():
-      currentNode = self.head
-      nextNode = currentNode.get_next()
-      while nextNode.get_next() is not None:
-        temp = nextNode.get_next()
-        nextNode.set_next(currentNode)
-        currentNode = nextNode
-        nextNode = temp
-      nextNode.set_next(currentNode)
-
+      self.head = recursive_helper(self.head, None)
     else:
       return
+
+
+  
+#from my code the other day:
+    # current =node
+    # new =current.next
+    # current.next = None
+    # while current.next:
+    #   prev =current
+    #   current = new
+    #   new = current.next
+    #   current.next = prev
+    # return current
